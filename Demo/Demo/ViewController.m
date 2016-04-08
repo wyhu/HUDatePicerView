@@ -22,6 +22,7 @@
     HUDatePicerView *he = [[HUDatePicerView alloc] initWithDateFormat:nil mode:HUDatePickerModeDate maxDate:nil minDate:nil style:1];
     
     he.delegate = self;
+    
     [self.view addSubview:he];
     
 }
