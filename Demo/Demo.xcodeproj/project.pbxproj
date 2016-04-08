@@ -13,6 +13,7 @@
 		6FD07DD91CB79C8200ED79C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FD07DD71CB79C8200ED79C0 /* Main.storyboard */; };
 		6FD07DDB1CB79C8200ED79C0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FD07DDA1CB79C8200ED79C0 /* Assets.xcassets */; };
 		6FD07DDE1CB79C8200ED79C0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FD07DDC1CB79C8200ED79C0 /* LaunchScreen.storyboard */; };
+		6FD07DE81CB79D3600ED79C0 /* HUDatePicerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD07DE71CB79D3600ED79C0 /* HUDatePicerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		6FD07DDA1CB79C8200ED79C0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6FD07DDD1CB79C8200ED79C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6FD07DDF1CB79C8200ED79C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6FD07DE61CB79D3600ED79C0 /* HUDatePicerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDatePicerView.h; sourceTree = "<group>"; };
+		6FD07DE71CB79D3600ED79C0 /* HUDatePicerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDatePicerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		6FD07DCD1CB79C8200ED79C0 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				6FD07DE51CB79D3600ED79C0 /* HUDatePickerView */,
 				6FD07DD11CB79C8200ED79C0 /* AppDelegate.h */,
 				6FD07DD21CB79C8200ED79C0 /* AppDelegate.m */,
 				6FD07DD41CB79C8200ED79C0 /* ViewController.h */,
@@ -77,6 +81,15 @@
 				6FD07DCF1CB79C8200ED79C0 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		6FD07DE51CB79D3600ED79C0 /* HUDatePickerView */ = {
+			isa = PBXGroup;
+			children = (
+				6FD07DE61CB79D3600ED79C0 /* HUDatePicerView.h */,
+				6FD07DE71CB79D3600ED79C0 /* HUDatePicerView.m */,
+			);
+			path = HUDatePickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6FD07DD61CB79C8200ED79C0 /* ViewController.m in Sources */,
+				6FD07DE81CB79D3600ED79C0 /* HUDatePicerView.m in Sources */,
 				6FD07DD31CB79C8200ED79C0 /* AppDelegate.m in Sources */,
 				6FD07DD01CB79C8200ED79C0 /* main.m in Sources */,
 			);
@@ -302,6 +316,7 @@
 				6FD07DE41CB79C8200ED79C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
