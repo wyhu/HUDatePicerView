@@ -26,10 +26,15 @@
     
     NSDate *hu_Date;
 }
-- (instancetype)initWithDateFormat:(NSString *)dateFormat mode:(HUDatePickerMode)mode maxDate:(NSDate *)maxDate minDate:(NSDate *)minDate
+- (instancetype)initWithDateFormat:(NSString *)dateFormat mode:(HUDatePickerMode)mode maxDate:(NSDate *)maxDate minDate:(NSDate *)minDate style:(style)style
 {
     self = [super initWithFrame:CGRectMake(0, 0, WIDTH1, HEIGHT1)];
     if (self) {
+        
+        
+        if (!dateFormat) {
+            dateFormat = @"yyyy-MM-dd";
+        }
         
         hu_DateFormat = dateFormat;
         
@@ -50,47 +55,105 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(removeSelf)];
         [zheZhao addGestureRecognizer:tap];
         
-        //取消 确定 按钮所在视图
-        UIView *topView = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT1 - 200*WSCALE6P - 45,WIDTH1 , 45)];
         
-        [self addSubview:topView];
+        UIView *bottomView = [[UIView alloc] init];
         
-        CGFloat btnWidth = (WIDTH1 - 1) / 2;
+        bottomView.backgroundColor = MJColor(229, 228, 235);
         
-        topView.backgroundColor = MJColor(229, 228, 235);
-        
-        
-        UIButton *btn = [self btnFactoryTitle:@"取消"];
-        
-        btn.frame = CGRectMake(0, 0, btnWidth, 45);
-        
-        [topView addSubview:btn];
-        
-        btn.tag = 200;
+        [self   addSubview:bottomView];
         
         
         
+        UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+        
+        datePicker.backgroundColor = [UIColor whiteColor];
+        
+        [bottomView addSubview:datePicker];
+        
+        [datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
         
         
-        [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        UIButton *sureBtn = [self btnFactoryTitle:@"确定"];
-        
-        
-        sureBtn.frame = CGRectMake(WIDTH1 - btnWidth, 0, btnWidth, 45);
-        
-        [topView addSubview:sureBtn];
+        //取消按钮
+        UIButton *btn = [self btnFactoryTitle:@"取消" tag:200];
         
         
-        sureBtn.tag = 201;
+        [bottomView addSubview:btn];
         
         
-        [sureBtn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+        //确定按钮
+        UIButton *sureBtn = [self btnFactoryTitle:@"确定" tag:201];
+        
+        [bottomView addSubview:sureBtn];
+        
+        if (!style) {
+            style = sheet;
+        }
         
         
-        //初始化pickerView
-        UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, HEIGHT1 - 200 *WSCALE6P,WIDTH1, 200*WSCALE6P)];
-        [self addSubview:datePicker];
+        switch (style) {
+            case 0:
+            {
+                
+                CGFloat bottomWidth = WIDTH1;
+                
+                CGFloat bottomHeight = 45 + 200*WSCALE6P;
+                
+                
+                //底部
+                bottomView.frame = CGRectMake(0, HEIGHT1 - bottomHeight,bottomWidth , bottomHeight);
+                
+                datePicker.frame = CGRectMake(0, 45,bottomWidth, bottomHeight - 45);
+                
+                
+                
+                btn.frame = CGRectMake(0, 0, (bottomWidth - 1) / 2, 45);
+                
+                sureBtn.frame = CGRectMake(btn.frame.size.width + 1, 0,btn.frame.size.width, 45);
+                
+            }
+                break;
+            case 1:
+            {
+                //中部
+                
+                
+                bottomView.layer.masksToBounds = YES;
+                
+                bottomView.layer.cornerRadius = 7.0 *WSCALE6P;
+                
+                
+                
+                CGFloat bottomWidth = WIDTH1 - 55 *2 *WSCALE6P;
+                
+                CGFloat bottomHeight = 45 +  280*WSCALE6P;
+                
+                
+                //底部
+                bottomView.frame = CGRectMake(55 * WSCALE6P, (HEIGHT1 - bottomHeight)/2- 45 ,bottomWidth , bottomHeight);
+                
+                
+                datePicker.frame = CGRectMake(0, 0,bottomWidth, bottomHeight - 45);
+                
+                
+                
+                btn.frame = CGRectMake(0, bottomHeight - 45, (bottomWidth - 1) / 2, 45);
+                
+                sureBtn.frame = CGRectMake(btn.frame.size.width + 1, bottomHeight - 45, btn.frame.size.width, 45);
+                
+                
+                
+            }
+                break;
+                
+                
+            default:
+                break;
+        }
+        
+        
+        
+        
         
         
         //设置时间范围
@@ -102,6 +165,10 @@
             datePicker.minimumDate = minDate;
         }
         
+        
+        if (!mode) {
+            mode = HUDatePickerModeDate;
+        }
         
         //选择类型
         switch (mode) {
@@ -137,10 +204,7 @@
                 break;
         }
         
-        datePicker.backgroundColor = [UIColor whiteColor];
         
-        
-        [datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
         
         
     }
@@ -169,6 +233,9 @@
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
             
             [dateFormat setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"] ];
+            
+            
+            
             
             [dateFormat setDateFormat:hu_DateFormat];
             
@@ -229,7 +296,7 @@
     [self removeFromSuperview];
 }
 
-- (UIButton *)btnFactoryTitle:(NSString *)title
+- (UIButton *)btnFactoryTitle:(NSString *)title tag:(NSInteger)tag_
 {
     
     UIButton *btn = [[UIButton alloc] init];
@@ -240,9 +307,12 @@
     
     btn.backgroundColor = MJColor(235, 234, 241);
     
-    
+    btn.tag = tag_;
     
     btn.titleLabel.font = Font(17);
+    
+    [btn addTarget:self action:@selector(btnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     return btn;
     
