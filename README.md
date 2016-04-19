@@ -1,17 +1,22 @@
-//使用方法
+###使用方法
 
-- (void)viewDidLoad {
+
+
+    
+    - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    
+
+    //使用方法
+
     HUDatePicerView *he = [[HUDatePicerView alloc] initWithDateFormat:nil mode:HUDatePickerModeDate maxDate:nil minDate:nil style:1];
-    
+    d
     he.delegate = self;
     
     [self.view addSubview:he];
-    
-}
-- (void)getRestlt:(NSString *)dateStr tag:(NSInteger)tag{
+     //代理事件
+    - (void)getRestlt:(NSString *)dateStr tag:(NSInteger)tag{
     NSLog(@"%@",dateStr);
-}
+    }
 
+    
+****
